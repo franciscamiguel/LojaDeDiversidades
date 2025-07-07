@@ -13,7 +13,7 @@ LojaDeDiversidades é uma aplicação completa de e-commerce, composta por um ba
 - [APIs e Endpoints](#apis-e-endpoints)
 - [Padrões e Boas Práticas](#padrões-e-boas-práticas)
 - [Contribuição](#contribuição)
-- [Licença] (#licença)
+- [Licença](#licença)
 
 ---
 

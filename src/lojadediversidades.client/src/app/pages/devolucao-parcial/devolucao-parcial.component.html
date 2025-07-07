@@ -1,0 +1,29 @@
+<!-- devolucao-parcial.component.html -->
+<h3>Devolução Parcial</h3>
+<form (ngSubmit)="devolverParcial()">
+  <table>
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Qtd. Comprada</th>
+        <th>Qtd. a Devolver</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of itensVenda">
+        <td>{{ item.nome }}</td>
+        <td>{{ item.quantidade }}</td>
+        <td>
+          <input type="number"
+                 min="0"
+                 [max]="item.quantidade"
+                 [value]="0"
+                 (change)="adicionarItemDevolucao(item.produtoId, item.quantidade)"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="submit">Devolver selecionados</button>
+</form>
+<div *ngIf="mensagem" style="color: green;">{{ mensagem }}</div>
+<div *ngIf="erro" style="color: red;">{{ erro }}</div>

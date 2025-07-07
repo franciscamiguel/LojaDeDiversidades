@@ -1,0 +1,27 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div>
+      <label>Email:</label>
+      <input type="email" formControlName="email" placeholder="Digite seu e-mail" />
+      <div class="error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+        Email obrigatório e válido!
+      </div>
+    </div>
+
+    <div>
+      <label>Senha:</label>
+      <input type="password" formControlName="senha" placeholder="Digite sua senha" />
+      <div class="error" *ngIf="form.get('senha')?.invalid && form.get('senha')?.touched">
+        Senha obrigatória!
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loading || form.invalid">Entrar</button>
+
+    <div class="loading" *ngIf="loading">Entrando...</div>
+    <div class="error" *ngIf="error">{{ error }}</div>
+  </form>
+  <div class="register-link">
+    <p>Não tem uma conta? <a routerLink="/cadastro">Registrar</a></p>
+</div>

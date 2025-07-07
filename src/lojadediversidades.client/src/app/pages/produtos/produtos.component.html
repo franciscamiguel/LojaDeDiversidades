@@ -1,0 +1,59 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <!-- Formulário Inline -->
+          <form class="row g-2 align-items-end mb-4" (ngSubmit)="salvarProduto()" [formGroup]="formProduto">
+            <div class="col-12 col-md">
+              <input type="text" class="form-control" formControlName="nome" placeholder="Nome" required>
+            </div>
+            <div class="col-12 col-md">
+              <input type="text" class="form-control" formControlName="descricao" placeholder="Descrição">
+            </div>
+            <div class="col-6 col-md-2">
+              <input type="number" min="0" class="form-control" formControlName="preco" placeholder="Preço" required>
+            </div>
+            <div class="col-6 col-md-2">
+              <input type="number" min="0" class="form-control" formControlName="quantidadeEstoque" placeholder="Qtd. Estoque" required>
+            </div>
+            <div class="col-12 col-md-auto">
+              <button type="submit" class="btn btn-success w-100" [disabled]="formProduto.invalid">Salvar</button>
+            </div>
+          </form>
+
+          <!-- Tabela de Produtos -->
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Nome</th>
+                  <th>Descrição</th>
+                  <th>Preço</th>
+                  <th>Qtd. Estoque</th>
+                  <th class="text-center" style="width: 140px;">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let produto of produtos">
+                  <td>{{ produto.nome }}</td>
+                  <td>{{ produto.descricao }}</td>
+                  <td>R$ {{ produto.preco | number:'1.2-2' }}</td>
+                  <td>{{ produto.quantidadeEstoque }}</td>
+                  <td class="text-center">
+                    <button class="btn btn-sm btn-warning me-1" (click)="editarProduto(produto)">Editar</button>
+                    <button class="btn btn-sm btn-danger" (click)="excluirProduto(produto.id)">Excluir</button>
+                  </td>
+                </tr>
+                <tr *ngIf="produtos.length === 0">
+                  <td colspan="5" class="text-center text-muted">Nenhum produto cadastrado.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

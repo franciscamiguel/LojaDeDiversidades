@@ -1,0 +1,72 @@
+<div class="container py-4">
+  <h2 class="fw-bold mb-4">Vendas - Loja de Diversidades</h2>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light fw-bold">Produtos disponíveis</div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6 col-lg-4" *ngFor="let produto of produtos">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title mb-1">{{ produto.nome }}</h5>
+                  <p class="card-text mb-2">{{ produto.descricao }}</p>
+                  <p class="mb-1"><strong>Preço:</strong> R$ {{ produto.preco | number:'1.2-2' }}</p>
+                  <p class="mb-1"><strong>Estoque:</strong> {{ produto.quantidadeEstoque }}</p>
+                </div>
+                <div class="card-footer bg-white border-0">
+                  <button class="btn btn-primary btn-sm w-100" (click)="adicionarAoCarrinho(produto)" [disabled]="produto.quantidadeEstoque === 0">
+                    Adicionar ao Carrinho
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="produtos.length === 0" class="text-center text-muted mt-4">Nenhum produto disponível.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Carrinho -->
+    <div class="col-md-5">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light fw-bold">Carrinho</div>
+        <div class="card-body">
+          <div *ngIf="carrinho.length === 0" class="text-muted text-center">Carrinho vazio</div>
+          <table class="table table-sm align-middle" *ngIf="carrinho.length > 0">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Qtd</th>
+                <th>Preço</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of carrinho">
+                <td>{{ item.nome }}</td>
+                <td>
+                  <input type="number" min="1" [max]="item.quantidadeEstoque"
+                         [(ngModel)]="item.quantidade"
+                         (ngModelChange)="alterarQuantidade(item.id, item.quantidade)"
+                         class="form-control form-control-sm" style="width: 60px;">
+                </td>
+                <td>R$ {{ item.produto.preco | number:'1.2-2' }}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" (click)="removerDoCarrinho(item.id)">x</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <hr *ngIf="carrinho.length > 0">
+          <div class="d-flex justify-content-between align-items-center" *ngIf="carrinho.length > 0">
+            <span class="fw-bold">Total:</span>
+            <span class="fw-bold text-success">R$ {{ totalCarrinho | number:'1.2-2' }}</span>
+          </div>
+        </div>
+        <div class="card-footer text-end bg-white border-0">
+          <button class="btn btn-success" (click)="finalizarVenda()" [disabled]="carrinho.length === 0">Finalizar Venda</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

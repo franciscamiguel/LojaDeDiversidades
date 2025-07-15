@@ -1,5 +1,7 @@
 ﻿using Asp.Versioning.ApiExplorer;
 using LojaDeDiversidades.Api.Configurations.Identity;
+using LojaDeDiversidades.Infra;
+using Microsoft.EntityFrameworkCore;
 
 namespace LojaDeDiversidades.Api.Configurations.Swagger;
 
@@ -18,6 +20,8 @@ public static class ApiDependencyInjectionConfig
 
     public static WebApplication UseApi(this WebApplication app)
     {
+        ApplyMigrations(app);
+
         app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
         app.UseHttpsRedirection();
@@ -33,5 +37,12 @@ public static class ApiDependencyInjectionConfig
             app.MapControllers();
 
         return app;
+    }
+
+    public static void ApplyMigrations(WebApplication app)
+    {
+        var services = app.Services.CreateScope().ServiceProvider;
+        var dataContext = services.GetRequiredService<LojaDbContext>();
+        dataContext.Database.Migrate();
     }
 }

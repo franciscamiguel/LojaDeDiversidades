@@ -27,9 +27,7 @@ public class TokenService(IConfiguration configuration) : ITokenService
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddHours(1),
-            Issuer = jwtConfig["Issuer"],
-            Audience = jwtConfig["Audience"],
+            Expires = DateTime.UtcNow.AddHours(8), // Aumentado para 8 horas
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature

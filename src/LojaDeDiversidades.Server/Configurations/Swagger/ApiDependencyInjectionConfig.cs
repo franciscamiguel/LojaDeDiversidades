@@ -20,6 +20,8 @@ public static class ApiDependencyInjectionConfig
     {
         app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
+        app.UseHttpsRedirection();
+
         var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
         app.UseVersionedSwagger(provider);
@@ -29,8 +31,6 @@ public static class ApiDependencyInjectionConfig
             app.MapControllers().AllowAnonymous();
         else
             app.MapControllers();
-
-        app.UseHttpsRedirection();
 
         return app;
     }

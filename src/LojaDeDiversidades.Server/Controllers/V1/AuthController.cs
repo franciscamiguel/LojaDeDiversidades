@@ -28,6 +28,10 @@ public class AuthController(IUsuarioRepository usuarioRepository, ITokenService 
             usuario.Perfil.ToString()
         );
 
+        // Debug: Vamos ver o token gerado
+        Console.WriteLine($"Token gerado no login: {token}");
+        Console.WriteLine($"Comprimento do token: {token.Length}");
+
         var response = new LoginResponseDto
         {
             Nome = usuario.Nome,

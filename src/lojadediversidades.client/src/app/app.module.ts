@@ -1,9 +1,10 @@
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import { SafeCurrencyPipe } from './pipes/safe-currency.pipe';
 import { CurrencyPipe } from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +33,14 @@ import { CadastroComponent } from './pages/cadastro/cadastro.component';
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [CurrencyPipe],
+  providers: [
+    CurrencyPipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

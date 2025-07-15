@@ -19,9 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LojaDeDiversidades.Domain",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Env", "Env", "{0ADDA39B-387D-4EC7-B4E2-204E346F5D7E}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
 		nuget.config = nuget.config
-		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{853C9E2F-E00D-4C3C-8007-510051CE85DD}"
